@@ -1,0 +1,20 @@
+name: aerostreamperu-trino-pyspark
+
+services:
+  pyspark:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4488:8888"
+      - "127.0.0.1:4042:4040"
+    volumes:
+      - ./sesiones:/opt
+      - type: bind
+        source: ./sesiones/s01-arquitectura/data/2026
+        target: /opt/s01-arquitectura/data/2026
+        read_only: true
+        bind:
+          create_host_path: false
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN:?Configura JUPYTER_TOKEN en pyspark/.env}

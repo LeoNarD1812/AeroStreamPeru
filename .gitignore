@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+credentials*.json
+.ipynb_checkpoints/
+__pycache__/
+/pyspark/sesiones/s01-arquitectura/data/
+/pyspark/sesiones/s03-procesamiento-calidad-datos/artifacts/
+/pyspark/sesiones/s04-ml-distribuido-regresion/artifacts/
+/pyspark/sesiones/s05-evaluacion-unidad-1/artifacts/
+/pyspark/sesiones/s08-streaming-estructurado/artifacts/
+/pyspark/sesiones/s09-observabilidad-pipeline/artifacts/
+/pyspark/sesiones/s10-series-tiempo-inferencia-streaming/artifacts/
+/pyspark/sesiones/s11-bi-ml-distribuido/artifacts/

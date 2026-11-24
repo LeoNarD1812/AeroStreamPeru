@@ -1,0 +1,320 @@
+{
+  "id": null,
+  "uid": "aerostreamperu-s09",
+  "title": "AeroStreamPeru · Observabilidad",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "refresh": "15s",
+  "timezone": "browser",
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Kafka Exporter disponible",
+      "type": "stat",
+      "description": "1 indica que Prometheus puede consultar al exportador del broker.",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "up{job=\"kafka-exporter\"}",
+          "legendFormat": "Kafka Exporter",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 2,
+      "title": "Edad de la última captura",
+      "type": "stat",
+      "description": "Tiempo desde el instante UTC solicitado en OpenSky.",
+      "gridPos": {
+        "x": 6,
+        "y": 0,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "time() - aerostream_opensky_ultima_captura_segundos",
+          "legendFormat": "OpenSky",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 3,
+      "title": "Capturas de la última ventana",
+      "type": "stat",
+      "description": "Cada ventana espera cinco capturas a intervalos de 120 segundos.",
+      "gridPos": {
+        "x": 12,
+        "y": 0,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "aerostream_ventana_capturas_observadas",
+          "legendFormat": "Observadas",
+          "refId": "A"
+        },
+        {
+          "expr": "aerostream_ventana_capturas_faltantes",
+          "legendFormat": "Faltantes",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 4,
+      "title": "Estados de la última captura",
+      "type": "stat",
+      "description": "Estados confirmados por el productor. El indicador de captura correcta identifica respuestas completas.",
+      "gridPos": {
+        "x": 18,
+        "y": 0,
+        "w": 6,
+        "h": 5
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "aerostream_opensky_ultima_captura_estados",
+          "legendFormat": "Estados",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "values": false
+        }
+      }
+    },
+    {
+      "id": 5,
+      "title": "Latencia de recepción a Spark",
+      "type": "timeseries",
+      "description": "Medida entre la recepción HTTP en el productor y la normalización en Spark.",
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "aerostream_telemetria_latencia_media_segundos",
+          "legendFormat": "Media",
+          "refId": "A"
+        },
+        {
+          "expr": "aerostream_telemetria_latencia_p95_segundos",
+          "legendFormat": "P95",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "title": "Tasa de entrada y procesamiento",
+      "type": "timeseries",
+      "description": "Tasas del último microlote con mensajes de la consulta de deduplicación.",
+      "gridPos": {
+        "x": 12,
+        "y": 5,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "aerostream_spark_entrada_mensajes_por_segundo{job=\"aerostream_spark_deduplicacion\"}",
+          "legendFormat": "Entrada",
+          "refId": "A"
+        },
+        {
+          "expr": "aerostream_spark_procesado_mensajes_por_segundo{job=\"aerostream_spark_deduplicacion\"}",
+          "legendFormat": "Procesados",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ops",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Retraso de consumo de Spark",
+      "type": "timeseries",
+      "description": "Diferencia entre los offsets disponibles y los procesados que reporta Spark.",
+      "gridPos": {
+        "x": 0,
+        "y": 13,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "aerostream_spark_retraso_kafka_mensajes{job=\"aerostream_spark_deduplicacion\"}",
+          "legendFormat": "Deduplicación",
+          "refId": "A"
+        },
+        {
+          "expr": "aerostream_spark_retraso_kafka_mensajes{job=\"aerostream_spark_ventanas\"}",
+          "legendFormat": "Ventanas",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "none",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "title": "Tiempo desde el último progreso",
+      "type": "timeseries",
+      "description": "Distingue métricas recientes de valores retenidos después de detener las consultas.",
+      "gridPos": {
+        "x": 12,
+        "y": 13,
+        "w": 12,
+        "h": 8
+      },
+      "datasource": null,
+      "targets": [
+        {
+          "expr": "time() - aerostream_spark_ultimo_progreso_segundos{job=~\"aerostream_spark_(deduplicacion|ventanas)\"}",
+          "legendFormat": "{{job}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "spanNulls": false
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        }
+      }
+    }
+  ]
+}

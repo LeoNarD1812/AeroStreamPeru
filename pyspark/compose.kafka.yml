@@ -1,0 +1,10 @@
+services:
+  pyspark:
+    networks:
+      - default
+      - aerostreamperu-trino-kafka-net
+
+networks:
+  aerostreamperu-trino-kafka-net:
+    external: true
+    name: aerostreamperu-trino-kafka-net

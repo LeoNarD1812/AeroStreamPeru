@@ -1,0 +1,27 @@
+name: aerostreamperu-trino-uso-opensky
+
+services:
+  productor:
+    build: .
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    volumes:
+      - type: bind
+        source: ../pyspark/sesiones/s07-ingesta-iot-sensores/productor_opensky.py
+        target: /app/productor_opensky.py
+        read_only: true
+        bind:
+          create_host_path: false
+    secrets:
+      - opensky
+    networks:
+      - aerostreamperu-trino-kafka-net
+
+secrets:
+  opensky:
+    file: ${OPENSKY_CREDENTIALS_FILE:?Indica la ruta local del archivo OAuth}
+
+networks:
+  aerostreamperu-trino-kafka-net:
+    external: true
+    name: aerostreamperu-trino-kafka-net
