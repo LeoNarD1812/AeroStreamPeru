@@ -12,3 +12,6 @@ __pycache__/
 /pyspark/sesiones/s09-observabilidad-pipeline/artifacts/
 /pyspark/sesiones/s10-series-tiempo-inferencia-streaming/artifacts/
 /pyspark/sesiones/s11-bi-ml-distribuido/artifacts/
+/practica-vibracion/artifacts/
+/practica-vibracion/identificador.local
+/practica-vibracion/wokwi-local/

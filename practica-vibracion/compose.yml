@@ -1,0 +1,15 @@
+name: aerostreamperu-practica-vibracion
+
+services:
+  puente:
+    build: .
+    volumes:
+      - ./app:/app:ro
+    command: ["python", "-u", "bridge_mqtt_kafka.py"]
+    networks:
+      - aerostreamperu-trino-kafka-net
+
+networks:
+  aerostreamperu-trino-kafka-net:
+    external: true
+    name: aerostreamperu-trino-kafka-net

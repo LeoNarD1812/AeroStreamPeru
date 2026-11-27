@@ -8,6 +8,8 @@ La [guía para otra laptop](docs/puesta-en-marcha.md) describe el ZIP del equipo
 
 La [presentación de las unidades I y II](docs/AeroStreamPeru_Equipo04_U1_U2.pptx) reúne los resultados y las capturas utilizadas para la sustentación.
 
+La [guía de práctica de vibración](practica-vibracion/README.md) reúne el arranque para Windows, el circuito de Wokwi y la demostración en Grafana.
+
 ## Unidad 1
 
 Desde PowerShell en la raíz del proyecto:

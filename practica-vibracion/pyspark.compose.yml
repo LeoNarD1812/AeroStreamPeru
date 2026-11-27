@@ -1,0 +1,4 @@
+services:
+  pyspark:
+    volumes:
+      - ../practica-vibracion:/opt/practica-vibracion
