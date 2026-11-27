@@ -1,0 +1,89 @@
+{
+  "uid": "aerostreamperu-temperatura",
+  "title": "AeroStreamPeru · Temperatura en vivo",
+  "tags": [
+    "AeroStreamPeru",
+    "temperatura",
+    "S11"
+  ],
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "refresh": "5s",
+  "timezone": "browser",
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "templating": {
+    "list": [
+      {
+        "name": "job",
+        "label": "Job de la práctica",
+        "type": "query",
+        "definition": "label_values(lambda26_ml_temperatura_real, job)",
+        "query": {
+          "query": "label_values(lambda26_ml_temperatura_real, job)",
+          "refId": "PrometheusVariableQueryEditor-VariableQuery"
+        },
+        "refresh": 2,
+        "includeAll": true,
+        "allValue": ".*",
+        "multi": false,
+        "current": {
+          "selected": true,
+          "text": "All",
+          "value": "$__all"
+        },
+        "options": [],
+        "sort": 1
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "Temperatura real y predicción siguiente",
+      "description": "La predicción se publica en el instante de su lectura de origen y apunta a la siguiente lectura del sensor.",
+      "gridPos": {
+        "x": 0,
+        "y": 0,
+        "w": 24,
+        "h": 13
+      },
+      "targets": [
+        {
+          "expr": "lambda26_ml_temperatura_real{job=~\"$job\"}",
+          "legendFormat": "Temperatura real · {{job}}",
+          "refId": "A",
+          "range": true
+        },
+        {
+          "expr": "lambda26_ml_temperatura_prediccion_siguiente{job=~\"$job\"}",
+          "legendFormat": "Predicción siguiente · {{job}}",
+          "refId": "B",
+          "range": true
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "decimals": 2
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "showLegend": true,
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      }
+    }
+  ]
+}

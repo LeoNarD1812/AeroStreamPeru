@@ -1,0 +1,4 @@
+PubSubClient
+DHT sensor library
+Adafruit Unified Sensor
+ArduinoJson@7.4.2

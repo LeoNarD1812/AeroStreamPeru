@@ -8,6 +8,8 @@ La [guía para otra laptop](docs/puesta-en-marcha.md) describe el ZIP del equipo
 
 La [presentación de las unidades I y II](docs/AeroStreamPeru_Equipo04_U1_U2.pptx) reúne los resultados y las capturas utilizadas para la sustentación.
 
+La [guía de práctica de temperatura](docs/practica-temperatura.md) explica el arranque en Windows, Wokwi, el notebook y el dashboard que se carga en Grafana.
+
 ## Unidad 1
 
 Desde PowerShell en la raíz del proyecto:

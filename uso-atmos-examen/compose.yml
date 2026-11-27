@@ -1,0 +1,17 @@
+name: aerostreamperu-uso-atmos-examen
+
+services:
+  uso-atmos:
+    build: .
+    container_name: aerostreamperu-uso-atmos-examen
+    volumes:
+      - ./app:/app
+    working_dir: /app
+    command: sleep infinity
+    networks:
+      - aerostreamperu-trino-kafka-net
+
+networks:
+  aerostreamperu-trino-kafka-net:
+    external: true
+    name: aerostreamperu-trino-kafka-net
